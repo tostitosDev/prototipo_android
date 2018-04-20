@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView logo;
     TextView status;
     Button register_button;
+    Button mark_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         logo = findViewById(R.id.image_logo);
         status =findViewById(R.id.status);
         register_button= findViewById(R.id.register_button);
+        mark_button = findViewById(R.id.button_mark);
         Picasso.get().load(R.drawable.unab).into(logo);
 
         status.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent bluetoothIntent = new Intent(MainActivity.this, BluetoothActivity.class );
                 startActivity(bluetoothIntent);
+                finish();
+            }
+        });
+
+        mark_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent markIntent = new Intent(MainActivity.this, MarkActivity.class);
+                startActivity(markIntent);
                 finish();
             }
         });

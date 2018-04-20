@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 public class Inscription extends AppCompatActivity {
     ImageView next;
+    ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,14 +21,28 @@ public class Inscription extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         next = findViewById(R.id.next_button_register);
+        back = findViewById(R.id.button_back);
 
-       next.setOnClickListener(new OnClickListener() {
+        next.setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent step2 = new Intent(Inscription.this, InscriptionStepTwo.class );
                startActivity(step2);
                finish();
-           }
-       });
+            }
+        });
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent main = new Intent(Inscription.this, MainActivity.class );
+        startActivity(main);
+        finish();
     }
 }

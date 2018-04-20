@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tesis.arduinoconnection.InscriptionStepTwo"
+    tools:context="com.tesis.arduinoconnection.MarkActivity"
     android:background="#062e2e">
 
     <LinearLayout
@@ -55,16 +55,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="10px"
-                    android:text="@string/title_inscription"
+                    android:text="@string/title_marks"
                     android:textColor="#fff"
                     android:textSize="80px" />
-
                 <ImageView
                     android:layout_gravity="center"
                     android:foregroundGravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_filter_2_black_24dp"
+                    android:src="@drawable/ic_filter_1_black_24dp"
                     android:tint="#fff" />
             </LinearLayout>
             <LinearLayout
@@ -81,51 +80,79 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="5"
             android:layout_gravity="center"
             android:gravity="center"
+            android:weightSum="2"
             android:foregroundGravity="center"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:foregroundGravity="center"
+            <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/insert_fingerprint"
-                android:textColor="#fff"
-                android:textSize="90px" />
-        </LinearLayout>
+                android:layout_height="0dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/button_in_mark"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttonshape"
+                        android:text="@string/mark_in"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/button_out_mark"
+                        android:layout_gravity="bottom|left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttonshape"
+                        android:text="@string/mark_out"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/button_out_collation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|right"
+                        android:background="@drawable/buttonshape"
+                        android:text="@string/mark_out_collation"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/button_in_collation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|left"
+                        android:background="@drawable/buttonshape"
+                        android:text="@string/mark_in_collation"/>
 
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
+            android:layout_weight="3"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:padding="50px"
-            android:layout_weight="5">
-
-            <ImageView
-                android:id="@+id/next_button_register"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:foregroundGravity="center"
-                android:src="@drawable/fingerprint"
-                android:tint="#fff"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:foregroundGravity="center"
-            android:layout_height="0dp">
-            <Button
-                android:id="@+id/finish_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/buttonshape"
-                android:text="@string/register"/>
-        </LinearLayout>
+            android:layout_height="0dp"></LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,11 @@
     <string name="title_inscription">Registro de trabajador</string>
     <string name="insert_rut">Rut del trabajador</string>
     <string name="insert_fingerprint">Pon tu dedo en el huellero</string>
+    <string name="title_marks">Marcación</string>
+    <string name="mark_in">Entrada turno</string>
+    <string name="mark_out">Salida turno</string>
+    <string name="mark_out_collation">Salida colaciónn</string>
+    <string name="mark_in_collation">Entrada colación</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

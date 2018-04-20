@@ -54,7 +54,11 @@ public class InscriptionStepTwo extends AppCompatActivity  {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
-                            Log.d("test",response.body().string());
+                            if(response.body() == null) {
+                                Log.d("error", "error");
+                            }else{
+                                Log.d("test",response.body().string());
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

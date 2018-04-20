@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".BluetoothActivity" />
         <activity android:name=".Inscription" />
-        <activity android:name=".InscriptionStepTwo"></activity>
+        <activity android:name=".InscriptionStepTwo" />
+        <activity android:name=".MarkActivity"></activity>
     </application>
 
 </manifest>
