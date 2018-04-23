@@ -97,6 +97,7 @@
                 android:textSize="90px" />
 
             <EditText
+                android:id="@+id/input_rut"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:foregroundGravity="center"

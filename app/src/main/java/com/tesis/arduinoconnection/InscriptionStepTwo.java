@@ -1,5 +1,7 @@
 package com.tesis.arduinoconnection;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +10,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.tesis.arduinoconnection.models.Fingerprint;
+import com.tesis.arduinoconnection.models.Result;
 
 import java.io.IOException;
 
@@ -32,6 +36,7 @@ public class InscriptionStepTwo extends AppCompatActivity  {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         back = findViewById(R.id.button_back);
+
         registerF = findViewById(R.id.finish_button);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,30 +47,51 @@ public class InscriptionStepTwo extends AppCompatActivity  {
         registerF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fingerprint newFinger = new Fingerprint("HXOS", "18.295.066-1", 1);
+                Fingerprint newFinger = new Fingerprint("HXOS", "6.627.031-9", 1);
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://c7340024.ngrok.io/api/v1/")
+                        .baseUrl("http://b71bed9c.ngrok.io/api/v1/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 LindiAPI api = retrofit.create(LindiAPI.class);
-                Call<ResponseBody> response = api.createFingerPrint(newFinger);
+                Call<Result> response = api.createFingerPrint(newFinger);
 
-                response.enqueue(new Callback<ResponseBody>() {
+                response.enqueue(new Callback<Result>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<Result> call, Response<Result> response) {
                         try {
                             if(response.body() == null) {
-                                Log.d("error", "error");
+                                new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("No hemos podido conectar").setNeutralButton("Close", null).show();
                             }else{
-                                Log.d("test",response.body().string());
+                                Result result = response.body();
+
+                                if(result.getResult().equals("not exist")){
+                                    new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Trabajador no existe").setNeutralButton("Close", null).show();
+                                }else{
+                                    if(result.getResult().equals("error")){
+                                        new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Error inesperado en el servidor ").setNeutralButton("Close", null).show();
+                                    }else{
+                                        if(result.getResult().equals("ok")){
+                                            Toast toast1 = Toast.makeText(getApplicationContext(),
+                                                            "¡Ingresado correctamente!", Toast.LENGTH_SHORT);
+                                            toast1.show();
+                                            Intent main = new Intent(InscriptionStepTwo.this, MainActivity.class );
+                                            startActivity(main);
+                                            finish();
+                                        }else{
+                                            if(result.getResult().equals("exist finger")){
+                                                new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Trabajador ya registrado").setNeutralButton("Close", null).show();
+                                            }
+                                        }
+                                    }
+                                }
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<Result> call, Throwable t) {
 
                     }
                 });
