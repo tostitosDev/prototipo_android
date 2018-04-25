@@ -39,25 +39,37 @@ public class MarkActivity extends AppCompatActivity {
         mark_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent bluetoothIntent = new Intent(MarkActivity.this, MarkStepTwo.class );
+                bluetoothIntent.putExtra("type_mark_id", 1);
+                startActivity(bluetoothIntent);
+                finish();
             }
         });
         mark_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent bluetoothIntent = new Intent(MarkActivity.this, MarkStepTwo.class );
+                bluetoothIntent.putExtra("type_mark_id", 4);
+                startActivity(bluetoothIntent);
+                finish();
             }
         });
         mark_in_collation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent bluetoothIntent = new Intent(MarkActivity.this, MarkStepTwo.class );
+                bluetoothIntent.putExtra("type_mark_id", 3);
+                startActivity(bluetoothIntent);
+                finish();
             }
         });
         mark_out_collation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent bluetoothIntent = new Intent(MarkActivity.this, MarkStepTwo.class );
+                bluetoothIntent.putExtra("type_mark_id", 2);
+                startActivity(bluetoothIntent);
+                finish();
             }
         });
     }

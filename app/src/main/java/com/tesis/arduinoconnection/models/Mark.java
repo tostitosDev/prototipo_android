@@ -11,13 +11,15 @@ public class Mark {
     private float latitude;
     private float longitude;
     private int id_in_sensor;
+    private int type_mark_id;
     private Date date_time_mark;
 
-    public Mark(float latitude, float longitude, int id_in_sensor) {
+    public Mark(float latitude, float longitude, int id_in_sensor, int type_mark_id) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.id_in_sensor = id_in_sensor;
         this.date_time_mark = Calendar.getInstance().getTime();
+        this.type_mark_id = type_mark_id;
     }
 
     public float getLatitude() {

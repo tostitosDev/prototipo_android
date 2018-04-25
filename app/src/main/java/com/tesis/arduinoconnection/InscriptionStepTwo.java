@@ -28,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InscriptionStepTwo extends AppCompatActivity  {
     ImageView back;
     Button registerF;
+    String rut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class InscriptionStepTwo extends AppCompatActivity  {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         back = findViewById(R.id.button_back);
+        rut = getIntent().getStringExtra("rut");
 
         registerF = findViewById(R.id.finish_button);
         back.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +49,9 @@ public class InscriptionStepTwo extends AppCompatActivity  {
         registerF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fingerprint newFinger = new Fingerprint("HXOS", "6.627.031-9", 1);
+                Fingerprint newFinger = new Fingerprint("6BF991DAC19", rut, 1);
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://b71bed9c.ngrok.io/api/v1/")
+                        .baseUrl("http://56a745d6.ngrok.io/api/v1/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 LindiAPI api = retrofit.create(LindiAPI.class);
@@ -60,15 +62,15 @@ public class InscriptionStepTwo extends AppCompatActivity  {
                     public void onResponse(Call<Result> call, Response<Result> response) {
                         try {
                             if(response.body() == null) {
-                                new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("No hemos podido conectar").setNeutralButton("Close", null).show();
+                                new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("No es posible conectar con el servidor").setNeutralButton("Cerrar", null).show();
                             }else{
                                 Result result = response.body();
 
                                 if(result.getResult().equals("not exist")){
-                                    new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Trabajador no existe").setNeutralButton("Close", null).show();
+                                    new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Trabajador no existe").setNeutralButton("Cerrar", null).show();
                                 }else{
                                     if(result.getResult().equals("error")){
-                                        new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Error inesperado en el servidor ").setNeutralButton("Close", null).show();
+                                        new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Error inesperado en el servidor ").setNeutralButton("Cerrar", null).show();
                                     }else{
                                         if(result.getResult().equals("ok")){
                                             Toast toast1 = Toast.makeText(getApplicationContext(),
@@ -79,7 +81,7 @@ public class InscriptionStepTwo extends AppCompatActivity  {
                                             finish();
                                         }else{
                                             if(result.getResult().equals("exist finger")){
-                                                new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Trabajador ya registrado").setNeutralButton("Close", null).show();
+                                                new AlertDialog.Builder(InscriptionStepTwo.this).setTitle("Error").setMessage("Trabajador ya registrado").setNeutralButton("Cerrar", null).show();
                                             }
                                         }
                                     }
